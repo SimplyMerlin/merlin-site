@@ -1,0 +1,39 @@
+---
+import BigFact from "../components/BigFact.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  page="developer"
+  title="Developer"
+  extraClasses="bg-neutral-900 text-neutral-300 font-mono"
+>
+  <main>
+    <section class="pt-32">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-row items-center justify-between">
+          <div class="">
+            <h1
+              style="word-spacing: -1.5rem;"
+              class="text-7xl font-bold tracking-tight"
+            >
+              I code some<br />
+              <span class="font-extrabold text-yellow-500">really</span> cool things.
+            </h1>
+          </div>
+          <div
+            class="aspect-square rounded-xl h-80 justify-self-end bg-gray-400"
+          >
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="pt-24 text-center">
+      <div class="grid grid-cols-3 max-w-4xl mx-auto">
+        <BigFact header="5+" description="years of experience" />
+        <BigFact header="110k+" description="total views" />
+        <BigFact header="5k+" description="total likes" />
+      </div>
+    </section>
+  </main>
+</Layout>
