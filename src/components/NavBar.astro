@@ -17,6 +17,7 @@ const getOpposite = () => {
   <div>
     <span class="font-semibold text-xl"
       ><a
+        rel="prefetch"
         class="hover:text-white/50 duration-300 transition-[letter-spacing_color] hover:tracking-widest"
         href="/">SimplyMerlin</a
       >
@@ -25,6 +26,7 @@ const getOpposite = () => {
         page === "developer" || page === "editor" ? (
           <a
             href={`/${getOpposite()}`}
+            rel="prefetch"
             class="relative inline-flex overflow-y-hidden"
           >
             <span class="select-none text-transparent" aria-hidden="true">
@@ -51,6 +53,7 @@ const getOpposite = () => {
     <a
       class="text-xl underline decoration-dashed transition-colors decoration-white/30 hover:text-white/80"
       href="/contact"
+      rel="prefetch"
     >
       contact
     </a>
