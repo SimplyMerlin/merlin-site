@@ -1,0 +1,61 @@
+---
+export interface Props {
+  title?: string;
+  page: string;
+}
+
+const { page, title } = Astro.props;
+
+const getOpposite = () => {
+  return page === "developer" ? "" : "developer";
+};
+---
+
+<nav
+  class="w-full fixed py-8 px-12 text-white mix-blend-difference flex justify-between"
+>
+  <div>
+    <span class="font-semibold text-xl"
+      ><a
+        rel="prefetch"
+        class="hover:text-white/75 duration-300 transition-[letter-spacing_color] hover:tracking-widest"
+        href="/">SimplyMerlin</a
+      >
+      {title && "/"}
+      {
+        page === "developer" || page === "editor" ? (
+          <a
+            href={`/${getOpposite()}`}
+            rel="prefetch"
+            class="relative inline-flex overflow-y-hidden"
+          >
+            <span class="select-none text-transparent" aria-hidden="true">
+              Developer
+            </span>
+            <span
+              class={`absolute top-0 left-0 transition-all ease-in-out duration-300 ${
+                page === "editor"
+                  ? "translate-y-0 hover:-translate-y-1/2"
+                  : "-translate-y-1/2 hover:translate-y-0"
+              }`}
+            >
+              <span class="block">Editor</span>
+              <span class="block">Developer</span>
+            </span>
+          </a>
+        ) : (
+          title || ""
+        )
+      }
+    </span>
+  </div>
+  <div>
+    <a
+      class="text-xl underline decoration-dashed transition-colors decoration-white/30 hover:text-white/80"
+      href="/contact"
+      rel="prefetch"
+    >
+      contact
+    </a>
+  </div>
+</nav>
