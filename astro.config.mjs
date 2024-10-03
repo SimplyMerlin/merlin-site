@@ -1,11 +1,26 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import rehypeExternalLinks from "rehype-external-links";
+import { remarkReadingTime } from "./remark-reading-time.mjs";
 
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
-  integrations: [mdx(), sitemap(), tailwind()]
+  markdown: {
+    remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [
+      // _blank for external links
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+          rel: ["noopener", "noreferrer"],
+        },
+      ],
+    ],
+  },
+  site: "https://simplymerlin.com",
+  integrations: [mdx(), sitemap(), tailwind()],
 });

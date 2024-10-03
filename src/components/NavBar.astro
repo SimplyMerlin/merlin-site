@@ -44,18 +44,19 @@ const getOpposite = () => {
             </span>
           </a>
         ) : (
-          title || ""
+          page.startsWith("snippets-") ? (
+          <a
+        rel="prefetch"
+        class="hover:text-white/75 duration-300 transition-[letter-spacing_color] hover:tracking-widest"
+        href="/snippets">{title}</a>
+          ) : (
+            title || ""
+          )
         )
       }
     </span>
   </div>
   <div class="flex gap-4">
-    <a
-      class="text-xl underline decoration-dashed transition-colors decoration-white/30 hover:text-white/80"
-      href="/blog"
-    >
-      blog
-    </a>
     <a
       class="text-xl underline decoration-dashed transition-colors decoration-white/30 hover:text-white/80"
       href="/contact"
