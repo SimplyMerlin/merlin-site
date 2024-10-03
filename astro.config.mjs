@@ -6,7 +6,7 @@ import { remarkReadingTime } from "./remark-reading-time.ts";
 
 import tailwind from "@astrojs/tailwind";
 
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel/static";
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,8 +26,9 @@ export default defineConfig({
 
   site: "https://simplymerlin.com",
   integrations: [mdx(), sitemap(), tailwind()],
-  output: "server",
   adapter: vercel({
-    webAnalytics: { enabled: true },
+    webAnalytics: {
+      enabled: true,
+    },
   }),
 });
