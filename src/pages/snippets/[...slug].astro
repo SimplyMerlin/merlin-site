@@ -24,7 +24,8 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
     description: entry.data.description,
     article: {
       publishedTime: entry.data.datePublished.toISOString()
-    }
+    },
+    type: "website"
   }}
 />
 <Layout title="Snippets" page=`snippets-${entry.slug}` extraClasses="bg-orange-50 text-stone-900">
