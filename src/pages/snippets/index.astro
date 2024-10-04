@@ -1,31 +1,47 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection, getEntry } from "astro:content";
 
-const snippets = (await getCollection("snippets")).sort(
-  (a, b) => b.data.datePublished.getMilliseconds() - a.data.datePublished.getMilliseconds()
-).reverse();
-
+const snippets = (await getCollection("snippets"))
+  .sort(
+    (a, b) =>
+      b.data.datePublished.getMilliseconds() -
+      a.data.datePublished.getMilliseconds(),
+  )
+  .reverse();
 ---
-<Layout title="Snippets" page="snippets" extraClasses="bg-orange-50 text-stone-900">
-	<main>
-        <section class="pt-32">
-			<div class="max-w-3xl mx-auto">
-				<h2 class="text-xl font-semibold text-center">Short snippets I have written over the years.</h2>
-                <ul class="pt-4">
-                    {snippets.sort().map(p => (
-                        <li>
-                            <a href={`/snippets/${p.slug}`}>
-                                <div class="group flex gap-6">
-                                    <span class="text-black/50 tabular-nums">{p.data.datePublished.toISOString().slice(0,10)}</span>
-                                    <span class="underline decoration-dashed transition-colors decoration-black/30 group-hover:text-black/60">{p.data.title}</span>
-                                </div>
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-			</div>
-	  </section>
-	</main>
+
+<Layout
+  title="Snippets"
+  page="snippets"
+  extraClasses="bg-orange-50 text-stone-900"
+>
+  <main>
+    <section class="pt-32">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-xl font-semibold text-center">
+          Short snippets I have written over the years.
+        </h2>
+        <ul class="pt-4">
+          {
+            snippets.sort().map((p) => (
+              <li>
+                <a href={`/snippets/${p.slug}`}>
+                  <div class="group flex gap-6">
+                    <span class="text-black/50 tabular-nums">
+                      {p.data.datePublished.toISOString().slice(0, 10)}
+                    </span>
+                    <span class="underline decoration-dashed transition-colors decoration-black/30 group-hover:text-black/60">
+                      {p.data.title}
+                    </span>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
 </Layout>

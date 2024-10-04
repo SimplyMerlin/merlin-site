@@ -1,19 +1,21 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/ArticleLayout.astro';
-import { AstroSeo } from '@astrolib/seo';
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/ArticleLayout.astro";
+import { AstroSeo } from "@astrolib/seo";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const snippetEntries = await getCollection('snippets');
-  return snippetEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
+  const snippetEntries = await getCollection("snippets");
+  return snippetEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
   }));
 }
 // 2. For your template, you can get the entry directly from the prop
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await entry.render();
 ---
+
 <AstroSeo
   title={`${entry.data.title} | Merlin's Blog`}
   description={entry.data.description}
@@ -23,28 +25,36 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
     title: `${entry.data.title} | Merlin's Blog`,
     description: entry.data.description,
     article: {
-      publishedTime: entry.data.datePublished.toISOString()
+      publishedTime: entry.data.datePublished.toISOString(),
     },
-    type: "website"
+    type: "website",
   }}
 />
-<Layout title="Snippets" page=`snippets-${entry.slug}` extraClasses="bg-orange-50 text-stone-900">
+<Layout
+  title="Snippets"
+  page=`snippets-${entry.slug}`
+  extraClasses="bg-orange-50 text-stone-900"
+>
   <div class="mx-auto max-w-2xl py-32">
-    <h1 class="text-3xl tracking-tight font-bold text-balance">{entry.data.title}</h1>
+    <h1 class="text-3xl tracking-tight font-bold text-balance">
+      {entry.data.title}
+    </h1>
     <div class="flex text-stone-600 gap-2">
       <time datetime={entry.data.datePublished.toISOString()}>
         {
-          entry.data.datePublished.toLocaleDateString('en-us', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
+          entry.data.datePublished.toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
           })
         }
       </time>
       -
       <span>{remarkPluginFrontmatter.minutesRead}</span>
     </div>
-    <article class="pt-8 prose prose-stone mx-auto prose-img:mb-0 prose-headings:mb-0 prose-headings:font-semibold prose-a:text-blue-600 prose-a:no-underline after:prose-a:content-['_↗']">
+    <article
+      class="pt-8 prose prose-stone mx-auto prose-img:mb-0 prose-headings:mb-0 prose-headings:font-semibold prose-a:text-blue-600 prose-a:no-underline after:prose-a:content-['_↗']"
+    >
       <Content />
     </article>
   </div>

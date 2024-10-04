@@ -1,34 +1,46 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import BigFact from "../components/BigFact.astro"
+import BigFact from "../components/BigFact.astro";
 ---
 
 <Layout title="Editor" page="editor" extraClasses="bg-orange-50 text-stone-900">
-	<main>
-	  <div class="min-h-screen grid items-center">
-			<div>
-				<div class="max-w-6xl mx-auto">
-					<div class="grid gap-2 mb-12 items-center justify-center">
-						<h1 class="text-7xl font-bold tracking-tight text-center">
-							Merlin lol
-						</h1>
-						<p class="text-center font-semibold text-2xl">good editor</p>
-					</div>
-				</div>
-				<div class="grid grid-cols-3 max-w-4xl mx-auto text-center">
-					<BigFact header="10M+" description="total views" />
-					<BigFact header="5+" description="years of experience" />
-					<BigFact header="500k+" description="total likes" />
-				</div>
-				<div class="mx-auto text-lg mt-12">
-					<div class="flex justify-center gap-8 text-blue-500 text-center underline decoration-dashed items-center">
-						<a href="https://www.youtube.com/playlist?list=PLe_xsQA-kWyIE1Y94Z7iH1BJTQXJMn_a1" target="_blank">All vids i've edited</a>
-						<a href="https://youtube.com/@SimplyMerlin" target="_blank">Youtube</a>
-						<a href="https://twitter.com/Simply_Merlin" target="_blank">Twitter</a>
-						<a href="https://discord.com/users/196505313099120640" target="_blank">Discord</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+  <main>
+    <div class="min-h-screen grid items-center">
+      <div>
+        <div class="max-w-6xl mx-auto">
+          <div class="grid gap-2 mb-12 items-center justify-center">
+            <h1 class="text-7xl font-bold tracking-tight text-center">
+              Merlin lol
+            </h1>
+            <p class="text-center font-semibold text-2xl">good editor</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 max-w-4xl mx-auto text-center">
+          <BigFact header="10M+" description="total views" />
+          <BigFact header="5+" description="years of experience" />
+          <BigFact header="500k+" description="total likes" />
+        </div>
+        <div class="mx-auto text-lg mt-12">
+          <div
+            class="flex justify-center gap-8 text-blue-500 text-center underline decoration-dashed items-center"
+          >
+            <a
+              href="https://www.youtube.com/playlist?list=PLe_xsQA-kWyIE1Y94Z7iH1BJTQXJMn_a1"
+              target="_blank">All vids i've edited</a
+            >
+            <a href="https://youtube.com/@SimplyMerlin" target="_blank"
+              >Youtube</a
+            >
+            <a href="https://twitter.com/Simply_Merlin" target="_blank"
+              >Twitter</a
+            >
+            <a
+              href="https://discord.com/users/196505313099120640"
+              target="_blank">Discord</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </Layout>

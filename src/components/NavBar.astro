@@ -43,15 +43,16 @@ const getOpposite = () => {
               <span class="block">Developer</span>
             </span>
           </a>
-        ) : (
-          page.startsWith("snippets-") ? (
+        ) : page.startsWith("snippets-") ? (
           <a
-        rel="prefetch"
-        class="hover:text-white/75 duration-300 transition-[letter-spacing_color] hover:tracking-widest"
-        href="/snippets">{title}</a>
-          ) : (
-            title || ""
-          )
+            rel="prefetch"
+            class="hover:text-white/75 duration-300 transition-[letter-spacing_color] hover:tracking-widest"
+            href="/snippets"
+          >
+            {title}
+          </a>
+        ) : (
+          title || ""
         )
       }
     </span>
