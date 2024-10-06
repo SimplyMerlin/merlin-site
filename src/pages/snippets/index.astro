@@ -19,8 +19,8 @@ const snippets = (await getCollection("snippets"))
 >
   <main>
     <section class="pt-32">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-xl font-semibold text-center">
+      <div class="mx-auto max-w-3xl">
+        <h2 class="text-center text-xl font-semibold">
           Short snippets I have written over the years.
         </h2>
         <ul class="pt-4">
@@ -29,10 +29,10 @@ const snippets = (await getCollection("snippets"))
               <li>
                 <a href={`/snippets/${p.slug}`}>
                   <div class="group flex gap-6">
-                    <span class="text-black/50 tabular-nums">
+                    <span class="tabular-nums text-black/50">
                       {p.data.datePublished.toISOString().slice(0, 10)}
                     </span>
-                    <span class="underline decoration-dashed transition-colors decoration-black/30 group-hover:text-black/60">
+                    <span class="underline decoration-black/30 decoration-dashed transition-colors group-hover:text-black/60">
                       {p.data.title}
                     </span>
                   </div>

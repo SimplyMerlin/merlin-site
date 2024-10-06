@@ -12,13 +12,13 @@ const getOpposite = () => {
 ---
 
 <nav
-  class="w-full fixed py-8 px-12 text-white mix-blend-difference flex justify-between"
+  class="fixed flex w-full justify-between px-12 py-8 text-white mix-blend-difference"
 >
   <div>
-    <span class="font-semibold text-xl"
+    <span class="text-xl font-semibold"
       ><a
         rel="prefetch"
-        class="hover:text-white/75 duration-300 transition-[letter-spacing_color] hover:tracking-widest"
+        class="transition-[letter-spacing_color] duration-300 hover:tracking-widest hover:text-white/75"
         href="/">SimplyMerlin</a
       >
       {title && "/"}
@@ -33,7 +33,7 @@ const getOpposite = () => {
               Developer
             </span>
             <span
-              class={`absolute top-0 left-0 transition-all ease-in-out duration-300 ${
+              class={`absolute left-0 top-0 transition-all duration-300 ease-in-out ${
                 page === "editor"
                   ? "translate-y-0 hover:-translate-y-1/2"
                   : "-translate-y-1/2 hover:translate-y-0"
@@ -46,7 +46,7 @@ const getOpposite = () => {
         ) : page.startsWith("snippets-") ? (
           <a
             rel="prefetch"
-            class="hover:text-white/75 duration-300 transition-[letter-spacing_color] hover:tracking-widest"
+            class="transition-[letter-spacing_color] duration-300 hover:tracking-widest hover:text-white/75"
             href="/snippets"
           >
             {title}
@@ -59,13 +59,13 @@ const getOpposite = () => {
   </div>
   <div class="flex gap-4">
     <a
-      class="text-xl underline decoration-dashed transition-colors decoration-white/30 hover:text-white/80"
+      class="text-xl underline decoration-white/30 decoration-dashed transition-colors hover:text-white/80"
       href="/snippets"
     >
       writing
     </a>
     <a
-      class="text-xl underline decoration-dashed transition-colors decoration-white/30 hover:text-white/80"
+      class="text-xl underline decoration-white/30 decoration-dashed transition-colors hover:text-white/80"
       href="/contact"
     >
       contact
