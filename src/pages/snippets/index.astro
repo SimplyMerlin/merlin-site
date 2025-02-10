@@ -6,10 +6,9 @@ import { getCollection, getEntry } from "astro:content";
 const snippets = (await getCollection("snippets"))
   .sort(
     (a, b) =>
-      b.data.datePublished.getMilliseconds() -
-      a.data.datePublished.getMilliseconds(),
-  )
-  .reverse();
+      b.data.datePublished.getTime() -
+      a.data.datePublished.getTime(),
+  );
 ---
 
 <Layout
@@ -25,7 +24,7 @@ const snippets = (await getCollection("snippets"))
         </h2>
         <ul class="pt-4">
           {
-            snippets.sort().map((p) => (
+            snippets.map((p) => (
               <li>
                 <a href={`/snippets/${p.slug}`}>
                   <div class="group flex gap-6">
