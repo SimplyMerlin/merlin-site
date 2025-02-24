@@ -3,7 +3,7 @@
 <p align="center">
  My own personal site that I worked VERY hard on!
  <br>
- <a href="https://simplymerlin.com/">https://simplymerlin.com/</a>
+ <a target="_blank"> href="https://simplymerlin.com/">https://simplymerlin.com/</a>
 </p>
 
 ## Why?
