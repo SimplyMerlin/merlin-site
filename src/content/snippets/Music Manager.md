@@ -1,6 +1,6 @@
 ---
 title: Music Manager for video editors
-datePublished: 2025-11-13
+datePublished: 2025-09-13
 description: Managing music for video editors is literally just mp3 files in a file explorer. It could be so much more.
 ---
 
