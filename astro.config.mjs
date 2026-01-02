@@ -4,9 +4,9 @@ import sitemap from "@astrojs/sitemap";
 import rehypeExternalLinks from "rehype-external-links";
 import { remarkReadingTime } from "./remark-reading-time.ts";
 
-import tailwind from "@astrojs/tailwind";
-
 import vercel from "@astrojs/vercel/static";
+
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,10 +25,15 @@ export default defineConfig({
   },
 
   site: "https://simplymerlin.com",
-  integrations: [mdx(), sitemap(), tailwind()],
+  integrations: [mdx(), sitemap()],
+
   adapter: vercel({
     webAnalytics: {
       enabled: true,
     },
   }),
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

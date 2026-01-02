@@ -36,7 +36,7 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
   extraClasses="bg-orange-50 text-stone-900"
 >
   <div class="mx-auto max-w-2xl px-3 py-32">
-    <h1 class="text-balance text-3xl font-bold tracking-tight">
+    <h1 class="text-3xl font-bold tracking-tight text-balance">
       {entry.data.title}
     </h1>
     <div class="flex gap-2 text-stone-600">
@@ -53,7 +53,7 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
       <span>{remarkPluginFrontmatter.minutesRead}</span>
     </div>
     <article
-      class="prose lg:prose-lg prose-stone mx-auto pt-8 prose-headings:mb-0 prose-headings:font-semibold prose-a:text-blue-600 prose-a:no-underline prose-a:transition-colors after:prose-a:content-['_↗'] hover:prose-a:text-blue-400 prose-img:mb-0"
+      class="prose lg:prose-lg prose-stone prose-headings:mb-0 prose-headings:font-semibold prose-a:text-blue-600 prose-a:no-underline prose-a:transition-colors prose-a:after:content-['_↗'] prose-a:hover:text-blue-400 prose-img:mb-0 mx-auto pt-8"
     >
       <Content />
     </article>
