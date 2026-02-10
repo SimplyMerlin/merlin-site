@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/NewLayout.astro";
+import VideoInfo from "../components/VideoInfo.astro";
 ---
 
 <Layout title="Editor" page="editor" extraClasses="bg-orange-50 text-stone-900">
@@ -19,43 +20,23 @@ import Layout from "../layouts/NewLayout.astro";
             </div>
         </div>
         <h2 class="text-center font-serif text-6xl tracking-tighter">
-            My best work
+            My best works
         </h2>
-        <div class="grid h-48 grid-cols-2 py-8">
+        <div class="grid grid-cols-2 py-8">
             <div
                 class="flex w-3/4 flex-col gap-4 rounded-xl bg-orange-100 px-4 py-2"
             >
-                <p>
-                    While the script is written by Legitimoose, almost all the
-                    shots are recorded by me! Including diving into the code and
-                    rolling back to older versions.
-                </p>
-                <div class="flex">
-                    <div
-                        class="flex items-center text-stone-700 hover:text-stone-900"
-                    >
-                        <p class="underline decoration-stone-900/30">0:53</p>
-                    </div>
-                    <div class="mx-3 w-px bg-stone-900/10"></div>
-                    <p>
-                        This video has some pretty cool motion graphics. I used
-                        After Effects expressions to create this accurate hex
-                        code converter.
-                    </p>
-                </div>
-                <div class="flex">
-                    <div
-                        class="flex items-center text-stone-700 hover:text-stone-900"
-                    >
-                        <p class="underline decoration-stone-900/30">2:69</p>
-                    </div>
-                    <div class="mx-3 w-px bg-stone-900/10"></div>
-                    <p>
-                        More motion graphics! This time trying to explain some
-                        fairly complex numbers in a little more digestable way.
-                        Also with just a little bit of tactile sound design.
-                    </p>
-                </div>
+                <VideoInfo
+                    description="While the script is written by Legitimoose, almost all the shots are recorded by me! Including diving into the code and rolling back to older versions."
+                />
+                <VideoInfo
+                    timecode="0:53"
+                    description="This video has some pretty cool motion graphics. I used After Effects expressions to create this accurate hex code converter."
+                />
+                <VideoInfo
+                    timecode="2:69"
+                    description="More motion graphics! This time trying to explain some fairly complex numbers in a little more digestable way. Also with just a little bit of tactile sound design."
+                />
             </div>
             <div class="aspect-video bg-red-500">test</div>
         </div>
