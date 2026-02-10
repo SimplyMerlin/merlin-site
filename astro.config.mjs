@@ -5,6 +5,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import { remarkReadingTime } from "./remark-reading-time.ts";
 
 import vercel from "@astrojs/vercel/static";
+import svelte from "@astrojs/svelte";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -33,7 +34,7 @@ export default defineConfig({
   },
 
   site: "https://simplymerlin.com",
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), svelte()],
 
   adapter: vercel({
     webAnalytics: {
