@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import rehypeExternalLinks from "rehype-external-links";
@@ -22,6 +22,14 @@ export default defineConfig({
         },
       ],
     ],
+  },
+
+  experimental: {
+    fonts: [{
+      provider: fontProviders.google(),
+      name: "Alice",
+      cssVariable: "--font-alice"
+    }]
   },
 
   site: "https://simplymerlin.com",
