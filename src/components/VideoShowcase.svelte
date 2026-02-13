@@ -149,37 +149,31 @@
 </script>
 
 <div class="flex flex-col gap-6 my-8">
-  <!-- Main content grid -->
   <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
-    <!-- Left: Video info panel -->
-    <div class="flex flex-col gap-4 rounded-xl bg-orange-100 px-5 py-4">
+    <div class="flex flex-col h-full gap-4 rounded-xl bg-orange-100 px-5 py-4">
       {#each activeVideo.highlights as highlight, i (activeIndex + "-" + i)}
-        <div class="flex items-start">
+        <div class="flex">
           {#if highlight.timecode}
-            <button
-              onclick={() => seekTo(highlight.seconds)}
-              class="mr-3 flex shrink-0 items-center border-r border-stone-900/10 pr-3 text-stone-700 transition-colors hover:text-stone-900"
-            >
-              <span
-                class="cursor-pointer underline decoration-stone-900/30 underline-offset-2"
-                >{highlight.timecode}</span
+            <div class="flex items-center text-stone-700 hover:text-stone-900">
+              <button
+                onclick={() => seekTo(highlight.seconds)}
+                class="underline decoration-stone-900/30"
+                >{highlight.timecode}</button
               >
-            </button>
+            </div>
+            <div class="mx-3 w-px bg-stone-900/10"></div>
           {/if}
           <p class="text-stone-800">{highlight.description}</p>
         </div>
       {/each}
     </div>
 
-    <!-- Right: YouTube iframe -->
     <div class="aspect-video w-full overflow-hidden rounded-xl bg-stone-200">
       <div id={playerContainerId} class="h-full w-full"></div>
     </div>
   </div>
 
-  <!-- Navigation: Apple-style arrows + dots -->
   <div class="flex items-center justify-center gap-4">
-    <!-- Left arrow -->
     <button
       onclick={goPrev}
       class="flex h-9 w-9 items-center justify-center rounded-full bg-stone-900/5 text-stone-600 transition-all hover:bg-stone-900/10 hover:text-stone-900 active:scale-95"
@@ -200,7 +194,6 @@
       </svg>
     </button>
 
-    <!-- Dots -->
     <div class="flex items-center gap-2">
       {#each videos as _, i}
         <button
@@ -214,7 +207,6 @@
       {/each}
     </div>
 
-    <!-- Right arrow -->
     <button
       onclick={goNext}
       class="flex h-9 w-9 items-center justify-center rounded-full bg-stone-900/5 text-stone-600 transition-all hover:bg-stone-900/10 hover:text-stone-900 active:scale-95"
