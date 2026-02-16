@@ -1,74 +1,21 @@
-<script>
-  /** @type {{ videos: Array<{ youtubeId: string, highlights: Array<{ timecode?: string, seconds?: number, description: string }> }> }} */
-  let {
-    videos = [
-      {
-        youtubeId: "EJePwAgbHbk",
-        highlights: [
-          {
-            description:
-              "While the script is written by Legitimoose, almost all the shots are recorded by me! Including diving into the code and rolling back to older versions.",
-          },
-          {
-            timecode: "0:53",
-            seconds: 53,
-            description:
-              "This video has some pretty cool motion graphics. I used After Effects expressions to create this accurate hex code converter.",
-          },
-          {
-            timecode: "2:69",
-            seconds: 169,
-            description:
-              "More motion graphics! This time trying to explain some fairly complex numbers in a little more digestable way. Also with just a little bit of tactile sound design.",
-          },
-        ],
-      },
-      {
-        youtubeId: "EJePwAgbHbk",
-        highlights: [
-          {
-            description: "BALLS BALLS BALLS.",
-          },
-          {
-            timecode: "0:53",
-            seconds: 53,
-            description:
-              "This video has some pretty cool motion graphics. I used After Effects expressions to create this accurate hex code converter.",
-          },
-          {
-            timecode: "2:69",
-            seconds: 169,
-            description:
-              "More motion graphics! This time trying to explain some fairly complex numbers in a little more digestable way. Also with just a little bit of tactile sound design.",
-          },
-        ],
-      },
-      {
-        youtubeId: "EJePwAgbHbk",
-        highlights: [
-          {
-            description:
-              "While the script is written by Legitimoose, almost all the shots are recorded by me! Including diving into the code and rolling back to older versions.",
-          },
-          {
-            timecode: "0:53",
-            seconds: 53,
-            description:
-              "This video has some pretty cool motion graphics. I used After Effects expressions to create this accurate hex code converter.",
-          },
-          {
-            timecode: "2:69",
-            seconds: 169,
-            description:
-              "More motion graphics! This time trying to explain some fairly complex numbers in a little more digestable way. Also with just a little bit of tactile sound design.",
-          },
-        ],
-      },
-    ],
-  } = $props();
+<script lang="ts">
+  import { videos as defaultVideos, type Video } from "../data/videos";
+
+  interface Props {
+    videos?: Video[];
+  }
+
+  let { videos = defaultVideos }: Props = $props();
+
+  interface YTPlayer {
+    seekTo(seconds: number, allowSeekAhead: boolean): void;
+    playVideo(): void;
+    loadVideoById(id: string): void;
+    destroy(): void;
+  }
 
   let activeIndex = $state(0);
-  let player = $state(null);
+  let player = $state<YTPlayer | null>(null);
   let playerReady = $state(false);
   let playerContainerId = "yt-player-" + Math.random().toString(36).slice(2, 9);
 
@@ -82,12 +29,12 @@
     activeIndex = (activeIndex - 1 + videos.length) % videos.length;
   }
 
-  function goTo(index) {
+  function goTo(index: number) {
     activeIndex = index;
   }
 
-  function seekTo(seconds) {
-    if (player && playerReady) {
+  function seekTo(seconds: number | undefined) {
+    if (player && playerReady && seconds !== undefined) {
       player.seekTo(seconds, true);
       player.playVideo();
     }
@@ -108,7 +55,8 @@
 
     // Define callback before loading script
     const onReady = () => {
-      player = new window.YT.Player(playerContainerId, {
+      const w = window as any;
+      player = new w.YT.Player(playerContainerId, {
         videoId: videos[activeIndex].youtubeId,
         playerVars: {
           autoplay: 0,
@@ -123,12 +71,14 @@
       });
     };
 
-    if (window.YT && window.YT.Player) {
+    const w = window as any;
+
+    if (w.YT && w.YT.Player) {
       onReady();
     } else {
       // Store previous callback if any
-      const prev = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => {
+      const prev = w.onYouTubeIframeAPIReady;
+      w.onYouTubeIframeAPIReady = () => {
         if (prev) prev();
         onReady();
       };
@@ -149,23 +99,35 @@
 </script>
 
 <div class="flex flex-col gap-6 my-8">
-  <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
-    <div class="flex flex-col h-full gap-4 rounded-xl bg-orange-100 px-5 py-4">
-      {#each activeVideo.highlights as highlight, i (activeIndex + "-" + i)}
-        <div class="flex">
-          {#if highlight.timecode}
-            <div class="flex items-center text-stone-700 hover:text-stone-900">
-              <button
-                onclick={() => seekTo(highlight.seconds)}
-                class="underline decoration-stone-900/30"
-                >{highlight.timecode}</button
+  <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+    <div
+      class="flex flex-col justify-between h-full rounded-xl bg-orange-100 px-5 py-4"
+    >
+      <div class="flex flex-col gap-4 text-lg">
+        {#each activeVideo.highlights as highlight, i (activeIndex + "-" + i)}
+          <div class="flex">
+            {#if highlight.timecode}
+              <div
+                class="flex items-center text-stone-700 hover:text-stone-900"
               >
-            </div>
-            <div class="mx-3 w-px bg-stone-900/10"></div>
-          {/if}
-          <p class="text-stone-800">{highlight.description}</p>
-        </div>
-      {/each}
+                <button
+                  onclick={() => seekTo(highlight.seconds)}
+                  class="underline decoration-stone-900/30 cursor-pointer"
+                  >{highlight.timecode}</button
+                >
+              </div>
+              <div class="mx-3 w-px bg-stone-900/10"></div>
+            {/if}
+            <p class="text-stone-800">{highlight.description}</p>
+          </div>
+        {/each}
+      </div>
+      <a
+        class="underline decoration-stone-900/30 text-stone-700 hover:text-stone-900"
+        href={activeVideo.playlistLink}
+        target="_blank"
+        rel="noopener noreferrer">{activeVideo.seeMoreText}</a
+      >
     </div>
 
     <div class="aspect-video w-full overflow-hidden rounded-xl bg-stone-200">
