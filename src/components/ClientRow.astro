@@ -1,28 +1,67 @@
 ---
+export interface Video {
+    youtubeId: string;
+    description: string;
+    views?: string;
+}
+
 export interface Props {
     name: string;
     pfp: string;
     bgColor: string;
     pfpWidth: string;
-    videos: number;
+    videos: Video[];
     flex?: string;
+    subscribers?: string;
+    url: string;
 }
 
-const { name, pfp, bgColor, pfpWidth, videos, flex } = Astro.props;
+const { name, pfp, bgColor, pfpWidth, videos, flex, subscribers, url } =
+    Astro.props;
+
+const gridColsClass: Record<number, string> = {
+    1: "grid-cols-1",
+    2: "grid-cols-2",
+    4: "grid-cols-4",
+};
 ---
 
 <div class={`flex ${flex ?? ""} items-center gap-4 rounded-xl ${bgColor} p-4`}>
-    <div class={`flex ${pfpWidth} shrink-0 flex-col items-center gap-2`}>
+    <a
+        href={url}
+        target="_blank"
+        class={`flex ${pfpWidth} shrink-0 flex-col items-center gap-2`}
+    >
         <img class="aspect-square w-full rounded-full" src={pfp} alt={name} />
         <div class="text-center font-medium">{name}</div>
-    </div>
-    <div class={`grid flex-1 grid-cols-${videos} gap-4`}>
         {
-            Array(videos)
-                .fill(null)
-                .map(() => (
-                    <div class="aspect-video w-full rounded-lg bg-stone-800" />
-                ))
+            subscribers && (
+                <div class="text-center text-sm text-stone-600">
+                    {subscribers}
+                </div>
+            )
+        }
+    </a>
+    <div class={`grid flex-1 ${gridColsClass[videos.length]} gap-4`}>
+        {
+            videos.map((video) => (
+                <div class="flex flex-col gap-1">
+                    <iframe
+                        class="aspect-video w-full rounded-lg"
+                        src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                        title={video.description}
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    />
+                    <p class="text-sm text-stone-700">{video.description}</p>
+                    {video.views && (
+                        <p class="text-xs text-stone-500">
+                            {video.views} views
+                        </p>
+                    )}
+                </div>
+            ))
         }
     </div>
 </div>
