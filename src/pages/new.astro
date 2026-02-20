@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/NewLayout.astro";
 import VideoShowcase from "../components/VideoShowcase.svelte";
+import ClientRow from "../components/ClientRow.astro";
 ---
 
 <Layout title="Editor" page="editor" extraClasses="bg-orange-50 text-stone-900">
@@ -23,110 +24,16 @@ import VideoShowcase from "../components/VideoShowcase.svelte";
             My best works
         </h2>
         <VideoShowcase client:load />
-        <div class="mu-16 flex items-center gap-4 rounded-xl bg-red-400/10 p-4">
-            <div class="flex w-[10%] shrink-0 flex-col items-center gap-2">
-                <img
-                    class="aspect-square w-full rounded-full"
-                    src="/pfps/ParrotX2.jpg"
-                    alt="ParrotX2"
-                />
-                <div class="text-center font-medium">ParrotX2</div>
+        <div class="flex flex-col gap-4">
+            <ClientRow name="ParrotX2" pfp="/pfps/ParrotX2.jpg" bgColor="bg-red-400/25" pfpWidth="w-[10%]" videos={4} flex="mu-16" />
+            <div class="flex items-stretch gap-4">
+                <ClientRow name="Unofficial Theo But Short" pfp="/pfps/theo-is-short-lol.jpg" bgColor="bg-purple-400/25" pfpWidth="w-[15%]" videos={2} flex="flex-2" />
+                <ClientRow name="HenryLand" pfp="/pfps/HenryLand.jpg" bgColor="bg-blue-400/25" pfpWidth="w-[30%]" videos={1} flex="flex-1" />
             </div>
-            <div class="grid flex-1 grid-cols-4 gap-4">
-                <div class="aspect-video w-full rounded-lg bg-stone-800"></div>
-                <div class="aspect-video w-full rounded-lg bg-stone-800"></div>
-                <div class="aspect-video w-full rounded-lg bg-stone-800"></div>
-                <div class="aspect-video w-full rounded-lg bg-stone-800"></div>
-            </div>
-        </div>
-        <div class="flex items-stretch gap-4">
-            <div
-                class="flex flex-2 items-center gap-4 rounded-xl bg-green-400/10 p-4"
-            >
-                <div class="flex w-[15%] shrink-0 flex-col items-center gap-2">
-                    <img
-                        class="aspect-square w-full rounded-full"
-                        src="/pfps/theo-is-short-lol.jpg"
-                        alt="Unofficial Theo But Short"
-                    />
-                    <div class="text-center font-medium">
-                        Unofficial Theo But Short
-                    </div>
-                </div>
-                <div class="grid flex-1 grid-cols-2 gap-4">
-                    <div class="aspect-video w-full rounded-lg bg-stone-800">
-                    </div>
-                    <div class="aspect-video w-full rounded-lg bg-stone-800">
-                    </div>
-                </div>
-            </div>
-            <div
-                class="flex flex-1 items-center gap-4 rounded-xl bg-red-900/10 p-4"
-            >
-                <div class="flex w-[30%] shrink-0 flex-col items-center gap-2">
-                    <img
-                        class="aspect-square w-full rounded-full"
-                        src="/pfps/HenryLand.jpg"
-                        alt="HenryLand"
-                    />
-                    <div class="text-center font-medium">HenryLand</div>
-                </div>
-                <div class="grid flex-1 grid-cols-1 gap-4">
-                    <div class="aspect-video w-full rounded-lg bg-stone-800">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flex items-center gap-4 rounded-xl bg-blue-400/10 p-4">
-            <div class="flex w-[10%] shrink-0 flex-col items-center gap-2">
-                <img
-                    class="aspect-square w-full rounded-full"
-                    src="/pfps/literally-me.jpg"
-                    alt="SimplyMerlin"
-                />
-                <div class="text-center font-medium">SimplyMerlin</div>
-            </div>
-            <div class="grid flex-1 grid-cols-4 gap-4">
-                <div class="aspect-video w-full rounded-lg bg-stone-800"></div>
-                <div class="aspect-video w-full rounded-lg bg-stone-800"></div>
-                <div class="aspect-video w-full rounded-lg bg-stone-800"></div>
-                <div class="aspect-video w-full rounded-lg bg-stone-800"></div>
-            </div>
-        </div>
-        <div class="flex items-stretch gap-4">
-            <div
-                class="flex flex-1 items-center gap-4 rounded-xl bg-red-900/10 p-4"
-            >
-                <div class="flex w-[30%] shrink-0 flex-col items-center gap-2">
-                    <img
-                        class="aspect-square w-full rounded-full"
-                        src="/pfps/MinuteTech.jpg"
-                        alt="MinuteTech"
-                    />
-                    <div class="text-center font-medium">MinuteTech</div>
-                </div>
-                <div class="grid flex-1 grid-cols-1 gap-4">
-                    <div class="aspect-video w-full rounded-lg bg-stone-800">
-                    </div>
-                </div>
-            </div>
-            <div
-                class="flex flex-2 items-center gap-4 rounded-xl bg-green-400/10 p-4"
-            >
-                <div class="flex w-[15%] shrink-0 flex-col items-center gap-2">
-                    <img
-                        class="aspect-square w-full rounded-full"
-                        src="/pfps/Legitimoose.jpg"
-                        alt="Legitimoose"
-                    />
-                    <div class="text-center font-medium">Legitimoose</div>
-                </div>
-                <div class="grid flex-1 grid-cols-2 gap-4">
-                    <div class="aspect-video w-full rounded-lg bg-stone-800">
-                    </div>
-                    <div class="aspect-video w-full rounded-lg bg-stone-800">
-                    </div>
-                </div>
+            <ClientRow name="SimplyMerlin" pfp="/pfps/literally-me.jpg" bgColor="bg-black/10" pfpWidth="w-[10%]" videos={4} />
+            <div class="flex items-stretch gap-4">
+                <ClientRow name="MinuteTech" pfp="/pfps/MinuteTech.jpg" bgColor="bg-red-900/25" pfpWidth="w-[30%]" videos={1} flex="flex-1" />
+                <ClientRow name="Legitimoose" pfp="/pfps/Legitimoose.jpg" bgColor="bg-green-400/25" pfpWidth="w-[15%]" videos={2} flex="flex-2" />
             </div>
         </div>
     </div>

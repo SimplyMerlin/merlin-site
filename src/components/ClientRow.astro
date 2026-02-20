@@ -1,0 +1,28 @@
+---
+export interface Props {
+    name: string;
+    pfp: string;
+    bgColor: string;
+    pfpWidth: string;
+    videos: number;
+    flex?: string;
+}
+
+const { name, pfp, bgColor, pfpWidth, videos, flex } = Astro.props;
+---
+
+<div class={`flex ${flex ?? ""} items-center gap-4 rounded-xl ${bgColor} p-4`}>
+    <div class={`flex ${pfpWidth} shrink-0 flex-col items-center gap-2`}>
+        <img class="aspect-square w-full rounded-full" src={pfp} alt={name} />
+        <div class="text-center font-medium">{name}</div>
+    </div>
+    <div class={`grid flex-1 grid-cols-${videos} gap-4`}>
+        {
+            Array(videos)
+                .fill(null)
+                .map(() => (
+                    <div class="aspect-video w-full rounded-lg bg-stone-800" />
+                ))
+        }
+    </div>
+</div>

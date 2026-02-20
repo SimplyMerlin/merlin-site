@@ -101,7 +101,7 @@
 <div class="flex flex-col gap-6 my-8">
   <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
     <div
-      class="flex flex-col justify-between h-full rounded-xl bg-orange-100 px-5 py-4"
+      class="flex flex-col justify-between h-full rounded-xl bg-orange-100 px-5 py-4 gap-8"
     >
       <div class="flex flex-col gap-4 text-lg">
         {#each activeVideo.highlights as highlight, i (activeIndex + "-" + i)}
