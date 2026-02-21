@@ -14,9 +14,10 @@ export interface Props {
     flex?: string;
     subscribers?: string;
     url: string;
+    shorts?: boolean;
 }
 
-const { name, pfp, bgColor, pfpWidth, videos, flex, subscribers, url } =
+const { name, pfp, bgColor, pfpWidth, videos, flex, subscribers, url, shorts } =
     Astro.props;
 
 const gridColsClass: Record<number, string> = {
@@ -47,11 +48,11 @@ const gridColsClass: Record<number, string> = {
             videos.map((video) => (
                 <div class="flex flex-col gap-1">
                     <iframe
-                        class="aspect-video w-full rounded-lg"
-                        src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                        class={`${shorts ? "aspect-[9/16]" : "aspect-video"} w-full rounded-lg`}
+                        src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
                         title={video.description}
                         frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allow="autoplay; encrypted-media"
                         allowfullscreen
                     />
                     <p class="text-sm text-stone-700">{video.description}</p>

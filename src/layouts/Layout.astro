@@ -1,7 +1,8 @@
 ---
 import NavBar from "../components/NavBar.astro";
 import { AstroSeo } from "@astrolib/seo";
-import '../styles/global.css';
+import "../styles/global.css";
+import { Font } from "astro:assets";
 
 export interface Props {
   title?: string;
@@ -23,6 +24,7 @@ const { title, page, extraClasses } = Astro.props;
       title={`${title} | Merlin's Portfolio`}
       description="Merlin's epic portfolio"
     />
+    <Font cssVariable="--font-alice" preload />
   </head>
   <body class={extraClasses}>
     <NavBar page={page} title={title} />

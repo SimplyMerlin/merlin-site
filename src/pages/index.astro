@@ -1,46 +1,178 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import BigFact from "../components/BigFact.astro";
+import VideoShowcase from "../components/VideoShowcase.svelte";
+import ClientRow from "../components/ClientRow.astro";
 ---
 
 <Layout title="Editor" page="editor" extraClasses="bg-orange-50 text-stone-900">
-  <main>
-    <div class="grid min-h-screen items-center">
-      <div>
-        <div class="mx-auto max-w-6xl">
-          <div class="mb-12 grid items-center justify-center gap-2">
-            <h1 class="text-center text-7xl font-bold tracking-tight">
-              Merlin lol
-            </h1>
-            <p class="text-center text-2xl font-semibold">good editor</p>
-          </div>
+    <div class="container mx-auto">
+        <div class="flex items-center justify-center py-48">
+            <div class="flex max-w-2xl flex-col gap-4">
+                <h1 class="text-center font-serif text-8xl tracking-tighter">
+                    Quite decent edits by <span class="text-brownish"
+                        >Merlin</span
+                    >!
+                </h1>
+                <p class="text-center text-2xl text-stone-700">
+                    I'm pretty good at video editing, but I'm not too sure what
+                    to write here. So this is temporary. Unless you see this...
+                    then I forgot to write something. (oops)
+                </p>
+            </div>
         </div>
-        <div class="mx-auto grid max-w-4xl grid-cols-3 text-center">
-          <BigFact header="15M+" description="total views" />
-          <BigFact header="6+" description="years of experience" />
-          <BigFact header="600k+" description="total likes" />
+        <h2 class="text-center font-serif text-6xl tracking-tighter">
+            My best works
+        </h2>
+        <VideoShowcase client:load />
+        <div class="flex flex-col gap-4">
+            <ClientRow
+                name="ParrotX2"
+                pfp="/pfps/ParrotX2.jpg"
+                bgColor="outline outline-red-400/25 bg-red-400/5"
+                pfpWidth="w-[10%]"
+                flex="mu-16"
+                subscribers="3.2M subs"
+                url="https://www.youtube.com/playlist?list=PLe_xsQA-kWyL0GY2RT6uIRJKGJLzRQtBh"
+                videos={[
+                    {
+                        youtubeId: "bb9XdN0nE-8",
+                        description: "Full edit, replay mod & VO writing",
+                        views: "1.7M",
+                    },
+                    {
+                        youtubeId: "g1fXTFzFt-M",
+                        description: "Full edit, replay mod & VO writing",
+                        views: "844k",
+                    },
+                    {
+                        youtubeId: "N_eiK11o3_s",
+                        description: "Full edit, replay mod & VO writing",
+                        views: "1.1M",
+                    },
+                    {
+                        youtubeId: "6yoaIJgDkiw",
+                        description: "Full edit, replay mod & VO writing",
+                        views: "349k",
+                    },
+                ]}
+            />
+            <div class="flex items-stretch gap-4">
+                <ClientRow
+                    name="MinuteTech"
+                    pfp="/pfps/MinuteTech.jpg"
+                    bgColor="outline outline-red-400/25 bg-red-400/5"
+                    pfpWidth="w-[30%]"
+                    flex="flex-1"
+                    subscribers="1.2M subs"
+                    url="https://www.youtube.com/@minutetechmc"
+                    videos={[
+                        {
+                            youtubeId: "IH96S_ef1Os",
+                            description: "Assistant editor (rough cut only)",
+                            views: "3.3M",
+                        },
+                    ]}
+                />
+                <ClientRow
+                    name="Legitimoose"
+                    pfp="/pfps/Legitimoose.jpg"
+                    bgColor="outline outline-green-400/25 bg-green-400/5"
+                    pfpWidth="w-[15%]"
+                    flex="flex-2"
+                    subscribers="95k subs"
+                    url="https://www.youtube.com/playlist?list=PLe_xsQA-kWyJ7enbSSUx-5uGOmvFT_apI"
+                    videos={[
+                        {
+                            youtubeId: "CnHJnCA0pwc",
+                            description: "Full edit",
+                        },
+                        {
+                            youtubeId: "EJePwAgbHbk",
+                            description:
+                                "Full edit, motion graphics, recording and flashback mod!",
+                        },
+                    ]}
+                />
+            </div>
+            <ClientRow
+                name="SimplyMerlin"
+                pfp="/pfps/literally-me.jpg"
+                bgColor="outline outline-black/25 bg-black/5"
+                pfpWidth="w-[10%]"
+                url="https://youtube.com/@SimplyMerlin"
+                subscribers="(owned by me)"
+                videos={[
+                    {
+                        youtubeId: "xbXqWFPat4E",
+                        description: "Full edit",
+                    },
+                    {
+                        youtubeId: "SLDoah0SoTI",
+                        description: "Full edit",
+                    },
+                    {
+                        youtubeId: "fcKUj8s0OBs",
+                        description: "Full edit... again",
+                    },
+                    {
+                        youtubeId: "U1liEne9Lww",
+                        description:
+                            "Full edit... you know these vids are kinda cringe and 4 years old lol",
+                    },
+                ]}
+            />
+
+            <div class="flex items-stretch gap-4">
+                <ClientRow
+                    name="HenryLand"
+                    pfp="/pfps/HenryLand.jpg"
+                    bgColor="outline outline-blue-400/25 bg-blue-400/5"
+                    pfpWidth="w-[30%]"
+                    flex="flex-1"
+                    subscribers="34k subs"
+                    url="https://www.youtube.com/playlist?list=PLe_xsQA-kWyL0u9sMz2G1n3y8VwgrVzqf"
+                    shorts={true}
+                    videos={[
+                        {
+                            youtubeId: "TC9YbkfmaRg",
+                            description: "Full edit + replay mod",
+                        },
+                        {
+                            youtubeId: "c8lqI8M0g4g",
+                            description: "Full edit + replay mod",
+                            views: "229k",
+                        },
+                    ]}
+                />
+                <ClientRow
+                    name="Unofficial Theo But Short"
+                    pfp="/pfps/theo-is-short-lol.jpg"
+                    bgColor="outline outline-purple-400/25 bg-purple-400/5"
+                    pfpWidth="w-[15%]"
+                    flex="flex-2"
+                    url="https://youtube.com/@TheoIsShort"
+                    subscribers="(owned by me)"
+                    shorts={true}
+                    videos={[
+                        {
+                            youtubeId: "M6VkZmIBYmQ",
+                            description: "Full edit",
+                        },
+                        {
+                            youtubeId: "9xMy0DBHv1A",
+                            description: "Full edit",
+                        },
+                        {
+                            youtubeId: "iWfkuJ3hR4U",
+                            description: "Full edit",
+                        },
+                        {
+                            youtubeId: "xFM87SA_mjE",
+                            description: "Full edit",
+                        },
+                    ]}
+                />
+            </div>
         </div>
-        <div class="mx-auto mt-12 text-lg">
-          <div
-            class="flex items-center justify-center gap-8 text-center text-blue-500 underline decoration-dashed"
-          >
-            <a
-              href="https://www.youtube.com/playlist?list=PLe_xsQA-kWyIE1Y94Z7iH1BJTQXJMn_a1"
-              target="_blank">All vids i've edited</a
-            >
-            <a href="https://youtube.com/@SimplyMerlin" target="_blank"
-              >Youtube</a
-            >
-            <a href="https://twitter.com/Simply_Merlin" target="_blank"
-              >Twitter</a
-            >
-            <a
-              href="https://discord.com/users/196505313099120640"
-              target="_blank">Discord</a
-            >
-          </div>
-        </div>
-      </div>
     </div>
-  </main>
 </Layout>
