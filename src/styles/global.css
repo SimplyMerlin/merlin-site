@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
-@config "./tailwind.config.mjs";
+@config "../../tailwind.config.mjs";
 
 @theme inline {
     --font-serif: var(--font-alice);

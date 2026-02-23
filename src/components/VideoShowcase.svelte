@@ -1,5 +1,6 @@
 <script lang="ts">
   import { videos as defaultVideos, type Video } from "../data/videos";
+  import { activeVideo as activeVideoStore } from "../stores/activeVideo";
 
   interface Props {
     videos?: Video[];
@@ -10,6 +11,7 @@
   interface YTPlayer {
     seekTo(seconds: number, allowSeekAhead: boolean): void;
     playVideo(): void;
+    pauseVideo(): void;
     loadVideoById(id: string): void;
     destroy(): void;
   }
@@ -19,18 +21,11 @@
   let playerReady = $state(false);
   let playerContainerId = "yt-player-" + Math.random().toString(36).slice(2, 9);
 
-  let activeVideo = $derived(videos[activeIndex]);
+  let currentVideo = $derived(videos[activeIndex]);
 
-  function goNext() {
-    activeIndex = (activeIndex + 1) % videos.length;
-  }
-
-  function goPrev() {
-    activeIndex = (activeIndex - 1 + videos.length) % videos.length;
-  }
-
-  function goTo(index: number) {
+  function handleGoTo(index: number) {
     activeIndex = index;
+    activeVideoStore.set({ youtubeId: videos[index].youtubeId, source: "showcase" });
   }
 
   function seekTo(seconds: number | undefined) {
@@ -45,6 +40,7 @@
     const vid = videos[activeIndex];
     if (player && playerReady && vid) {
       player.loadVideoById(vid.youtubeId);
+      player.playVideo();
     }
   });
 
@@ -66,6 +62,14 @@
         events: {
           onReady: () => {
             playerReady = true;
+          },
+          onStateChange: (event: any) => {
+            const w = window as any;
+            if (event.data === w.YT.PlayerState.PLAYING) {
+              activeVideoStore.set({ youtubeId: videos[activeIndex].youtubeId, source: "showcase" });
+            } else if (event.data === w.YT.PlayerState.PAUSED || event.data === w.YT.PlayerState.ENDED) {
+              activeVideoStore.set(null);
+            }
           },
         },
       });
@@ -96,6 +100,27 @@
       }
     };
   });
+
+  // Subscribe to activeVideoStore - pause when another video plays
+  $effect(() => {
+    const unsubscribe = activeVideoStore.subscribe((active: { youtubeId: string; source: string } | null) => {
+      // Pause if: there's an active video AND it's from a different source
+      if (active && active.source !== "showcase" && player && playerReady) {
+        player.pauseVideo();
+      }
+    });
+    return unsubscribe;
+  });
+
+  function goNext() {
+    activeIndex = (activeIndex + 1) % videos.length;
+    activeVideoStore.set({ youtubeId: videos[activeIndex].youtubeId, source: "showcase" });
+  }
+
+  function goPrev() {
+    activeIndex = (activeIndex - 1 + videos.length) % videos.length;
+    activeVideoStore.set({ youtubeId: videos[activeIndex].youtubeId, source: "showcase" });
+  }
 </script>
 
 <div class="flex flex-col gap-6 my-8">
@@ -104,7 +129,7 @@
       class="flex flex-col justify-between h-full rounded-xl bg-orange-100 px-5 py-4 gap-8"
     >
       <div class="flex flex-col gap-4 text-lg">
-        {#each activeVideo.highlights as highlight, i (activeIndex + "-" + i)}
+        {#each currentVideo.highlights as highlight, i (activeIndex + "-" + i)}
           <div class="flex">
             {#if highlight.timecode}
               <div
@@ -124,9 +149,9 @@
       </div>
       <a
         class="underline decoration-stone-900/30 text-stone-700 hover:text-stone-900"
-        href={activeVideo.playlistLink}
+        href={currentVideo.playlistLink}
         target="_blank"
-        rel="noopener noreferrer">{activeVideo.seeMoreText}</a
+        rel="noopener noreferrer">{currentVideo.seeMoreText}</a
       >
     </div>
 
@@ -159,7 +184,7 @@
     <div class="flex items-center gap-2">
       {#each videos as _, i}
         <button
-          onclick={() => goTo(i)}
+          onclick={() => handleGoTo(i)}
           class="h-2.5 w-2.5 rounded-full transition-all duration-300 {i ===
           activeIndex
             ? 'bg-stone-800 scale-110'

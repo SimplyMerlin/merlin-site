@@ -1,4 +1,6 @@
 ---
+import LazyYouTube from "./LazyYouTube.svelte";
+
 export interface Video {
     youtubeId: string;
     description: string;
@@ -47,13 +49,11 @@ const gridColsClass: Record<number, string> = {
         {
             videos.map((video) => (
                 <div class="flex flex-col gap-1">
-                    <iframe
-                        class={`${shorts ? "aspect-[9/16]" : "aspect-video"} w-full rounded-lg`}
-                        src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
-                        title={video.description}
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
+                    <LazyYouTube
+                        client:visible
+                        youtubeId={video.youtubeId}
+                        description={video.description}
+                        shorts={shorts}
                     />
                     <p class="text-sm text-stone-700">{video.description}</p>
                     {video.views && (
