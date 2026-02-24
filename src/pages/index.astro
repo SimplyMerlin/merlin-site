@@ -5,7 +5,7 @@ import ClientRow from "../components/ClientRow.astro";
 ---
 
 <Layout title="Editor" page="editor" extraClasses="bg-orange-50 text-stone-900">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-2">
         <div class="flex items-center justify-center py-48">
             <div class="flex max-w-2xl flex-col gap-4">
                 <h1 class="text-center font-serif text-8xl tracking-tighter">
@@ -24,7 +24,10 @@ import ClientRow from "../components/ClientRow.astro";
             My best works
         </h2>
         <VideoShowcase client:load />
-        <div class="flex flex-col gap-4">
+        <h2 class="mt-16 text-center font-serif text-6xl tracking-tighter">
+            Clients & Vids
+        </h2>
+        <div class="my-8 flex flex-col gap-4">
             <ClientRow
                 name="ParrotX2"
                 pfp="/pfps/ParrotX2.jpg"
@@ -56,7 +59,7 @@ import ClientRow from "../components/ClientRow.astro";
                     },
                 ]}
             />
-            <div class="flex items-stretch gap-4">
+            <div class="flex items-stretch gap-4 max-sm:flex-col">
                 <ClientRow
                     name="MinuteTech"
                     pfp="/pfps/MinuteTech.jpg"
@@ -122,7 +125,7 @@ import ClientRow from "../components/ClientRow.astro";
                 ]}
             />
 
-            <div class="flex items-stretch gap-4">
+            <div class="flex items-stretch gap-4 max-sm:flex-col">
                 <ClientRow
                     name="HenryLand"
                     pfp="/pfps/HenryLand.jpg"
