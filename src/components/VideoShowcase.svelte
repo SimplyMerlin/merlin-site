@@ -24,8 +24,11 @@
   let currentVideo = $derived(videos[activeIndex]);
 
   function handleGoTo(index: number) {
+    activeVideoStore.set({
+      youtubeId: videos[index].youtubeId,
+      source: "showcase",
+    });
     activeIndex = index;
-    activeVideoStore.set({ youtubeId: videos[index].youtubeId, source: "showcase" });
   }
 
   function seekTo(seconds: number | undefined) {
@@ -66,8 +69,14 @@
           onStateChange: (event: any) => {
             const w = window as any;
             if (event.data === w.YT.PlayerState.PLAYING) {
-              activeVideoStore.set({ youtubeId: videos[activeIndex].youtubeId, source: "showcase" });
-            } else if (event.data === w.YT.PlayerState.PAUSED || event.data === w.YT.PlayerState.ENDED) {
+              activeVideoStore.set({
+                youtubeId: videos[activeIndex].youtubeId,
+                source: "showcase",
+              });
+            } else if (
+              event.data === w.YT.PlayerState.PAUSED ||
+              event.data === w.YT.PlayerState.ENDED
+            ) {
               activeVideoStore.set(null);
             }
           },
@@ -103,23 +112,31 @@
 
   // Subscribe to activeVideoStore - pause when another video plays
   $effect(() => {
-    const unsubscribe = activeVideoStore.subscribe((active: { youtubeId: string; source: string } | null) => {
-      // Pause if: there's an active video AND it's from a different source
-      if (active && active.source !== "showcase" && player && playerReady) {
-        player.pauseVideo();
-      }
-    });
+    const unsubscribe = activeVideoStore.subscribe(
+      (active: { youtubeId: string; source: string } | null) => {
+        // Pause if: there's an active video AND it's from a different source
+        if (active && active.source !== "showcase" && player && playerReady) {
+          player.pauseVideo();
+        }
+      },
+    );
     return unsubscribe;
   });
 
   function goNext() {
     activeIndex = (activeIndex + 1) % videos.length;
-    activeVideoStore.set({ youtubeId: videos[activeIndex].youtubeId, source: "showcase" });
+    activeVideoStore.set({
+      youtubeId: videos[activeIndex].youtubeId,
+      source: "showcase",
+    });
   }
 
   function goPrev() {
     activeIndex = (activeIndex - 1 + videos.length) % videos.length;
-    activeVideoStore.set({ youtubeId: videos[activeIndex].youtubeId, source: "showcase" });
+    activeVideoStore.set({
+      youtubeId: videos[activeIndex].youtubeId,
+      source: "showcase",
+    });
   }
 </script>
 
