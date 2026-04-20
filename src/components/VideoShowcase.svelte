@@ -141,7 +141,11 @@
 </script>
 
 <div class="flex flex-col gap-6 my-8">
-  <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+  <div
+    class={`grid grid-cols-1 items-center gap-8 ${
+      currentVideo.short ? "md:grid-cols-[3fr_1fr]" : "md:grid-cols-2"
+    }`}
+  >
     <div
       class="flex flex-col justify-between h-full rounded-xl bg-orange-100 px-5 py-4 gap-8"
     >
@@ -172,7 +176,11 @@
       >
     </div>
 
-    <div class="aspect-video w-full overflow-hidden rounded-xl bg-stone-200">
+    <div
+      class={`w-full overflow-hidden rounded-xl bg-stone-200 ${
+        currentVideo.short ? "aspect-9/16" : "aspect-video"
+      }`}
+    >
       <div id={playerContainerId} class="h-full w-full"></div>
     </div>
   </div>
