@@ -77,7 +77,7 @@ export const videos: Video[] = [
       },
       {
         description:
-          "The main challenge of this experiment was seeing how quickly I could go from opening theo's channel to uploading the short. The answer; just 1 hour.",
+          "The main challenge of this experiment was seeing how quickly I could go from opening theo's channel to uploading the short. When I got into the flow I ended up going from clicking on a random video to uploading the short in just under one hour.",
       },
       {
         description:

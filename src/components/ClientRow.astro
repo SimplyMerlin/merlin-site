@@ -37,7 +37,11 @@ const gridColsClass: Record<number, string> = {
         target="_blank"
         class={`flex ${pfpWidth} shrink-0 flex-col items-center gap-2`}
     >
-        <img class="aspect-square w-full rounded-full" src={pfp} alt={name} />
+        <img
+            class="aspect-square w-full rounded-full transition-opacity duration-100 hover:opacity-75"
+            src={pfp}
+            alt={name}
+        />
         <div class="text-center font-medium">{name}</div>
         {
             subscribers && (

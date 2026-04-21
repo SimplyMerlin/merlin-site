@@ -44,7 +44,7 @@
       <img
         src={`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
         alt={description}
-        class={`${shorts ? "aspect-9/16" : "aspect-video"} w-full rounded-lg object-cover hover:opacity-75`}
+        class={`${shorts ? "aspect-9/16" : "aspect-video"} w-full rounded-lg object-cover hover:opacity-75 duration-100 transition-opacity`}
         loading="lazy"
       />
     </button>
