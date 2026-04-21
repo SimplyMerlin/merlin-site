@@ -154,7 +154,7 @@
           <div class="flex">
             {#if highlight.timecode}
               <div
-                class="flex items-center text-stone-700 hover:text-stone-900"
+                class="flex items-center text-stone-700 hover:text-stone-900 transition-colors"
               >
                 <button
                   onclick={() => seekTo(highlight.seconds)}
@@ -169,7 +169,7 @@
         {/each}
       </div>
       <a
-        class="underline decoration-stone-900/30 text-stone-700 hover:text-stone-900"
+        class="underline decoration-stone-900/30 text-stone-700 hover:text-stone-900 transition-colors"
         href={currentVideo.playlistLink}
         target="_blank"
         rel="noopener noreferrer">{currentVideo.seeMoreText}</a
