@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import { ChevronLeft, ChevronRight } from "lucide-svelte";
   import { videos as defaultVideos, type Video } from "../data/videos";
   import { activeVideo as activeVideoStore } from "../stores/activeVideo";
+  import { ensureYouTubeAPI, type YTPlayer } from "../utils/youtubePlayer";
 
   interface Props {
     videos?: Video[];
@@ -9,27 +11,27 @@
 
   let { videos = defaultVideos }: Props = $props();
 
-  interface YTPlayer {
-    seekTo(seconds: number, allowSeekAhead: boolean): void;
-    playVideo(): void;
-    pauseVideo(): void;
-    loadVideoById(id: string): void;
-    destroy(): void;
-  }
-
   let activeIndex = $state(0);
   let player = $state<YTPlayer | null>(null);
   let playerReady = $state(false);
-  let playerContainerId = "yt-player-" + Math.random().toString(36).slice(2, 9);
 
-  let currentVideo = $derived(videos[activeIndex]);
+  const containerId = "yt-player-showcase";
+  const currentVideo = $derived(videos[activeIndex]);
 
-  function handleGoTo(index: number) {
+  function navigateTo(index: number) {
+    activeIndex = index;
     activeVideoStore.set({
       youtubeId: videos[index].youtubeId,
       source: "showcase",
     });
-    activeIndex = index;
+  }
+
+  function goNext() {
+    navigateTo((activeIndex + 1) % videos.length);
+  }
+
+  function goPrev() {
+    navigateTo((activeIndex - 1 + videos.length) % videos.length);
   }
 
   function seekTo(seconds: number | undefined) {
@@ -39,25 +41,16 @@
     }
   }
 
-  // Load new video when activeIndex changes
   $effect(() => {
-    const vid = videos[activeIndex];
-    if (player && playerReady && vid) {
-      player.loadVideoById(vid.youtubeId);
-      player.playVideo();
-    }
-  });
+    let destroyed = false;
 
-  // Mount YouTube IFrame API on component init
-  $effect(() => {
-    // Only run in browser
-    if (typeof window === "undefined") return;
+    (async () => {
+      await ensureYouTubeAPI();
+      if (destroyed) return;
 
-    // Define callback before loading script
-    const onReady = () => {
       const w = window as any;
-      player = new w.YT.Player(playerContainerId, {
-        videoId: videos[activeIndex].youtubeId,
+      player = new w.YT.Player(containerId, {
+        videoId: untrack(() => videos[activeIndex].youtubeId),
         playerVars: {
           autoplay: 0,
           modestbranding: 1,
@@ -71,7 +64,7 @@
             const w = window as any;
             if (event.data === w.YT.PlayerState.PLAYING) {
               activeVideoStore.set({
-                youtubeId: videos[activeIndex].youtubeId,
+                youtubeId: untrack(() => videos[activeIndex].youtubeId),
                 source: "showcase",
               });
             } else if (
@@ -83,75 +76,42 @@
           },
         },
       });
-    };
-
-    const w = window as any;
-
-    if (w.YT && w.YT.Player) {
-      onReady();
-    } else {
-      // Store previous callback if any
-      const prev = w.onYouTubeIframeAPIReady;
-      w.onYouTubeIframeAPIReady = () => {
-        if (prev) prev();
-        onReady();
-      };
-
-      if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(tag);
-      }
-    }
+    })();
 
     return () => {
-      if (player && player.destroy) {
-        player.destroy();
-      }
+      destroyed = true;
+      player?.destroy();
     };
   });
 
-  // Subscribe to activeVideoStore - pause when another video plays
   $effect(() => {
-    const unsubscribe = activeVideoStore.subscribe(
-      (active: { youtubeId: string; source: string } | null) => {
-        // Pause if: there's an active video AND it's from a different source
-        if (active && active.source !== "showcase" && player && playerReady) {
-          player.pauseVideo();
-        }
-      },
-    );
-    return unsubscribe;
+    const vid = currentVideo;
+    if (player && playerReady) {
+      player.loadVideoById(vid.youtubeId);
+      player.playVideo();
+    }
   });
 
-  function goNext() {
-    activeIndex = (activeIndex + 1) % videos.length;
-    activeVideoStore.set({
-      youtubeId: videos[activeIndex].youtubeId,
-      source: "showcase",
+  $effect(() => {
+    return activeVideoStore.subscribe((active) => {
+      if (active && active.source !== "showcase" && player && playerReady) {
+        player.pauseVideo();
+      }
     });
-  }
-
-  function goPrev() {
-    activeIndex = (activeIndex - 1 + videos.length) % videos.length;
-    activeVideoStore.set({
-      youtubeId: videos[activeIndex].youtubeId,
-      source: "showcase",
-    });
-  }
+  });
 </script>
 
 <div class="flex flex-col gap-6 my-8">
   <div
-    class={`grid grid-cols-1 items-center gap-8 ${
-      currentVideo.short ? "md:grid-cols-[4fr_1fr]" : "md:grid-cols-2"
-    }`}
+    class="grid grid-cols-1 items-center gap-8 {currentVideo.short
+      ? 'md:grid-cols-[4fr_1fr]'
+      : 'md:grid-cols-2'}"
   >
     <div
       class="flex flex-col justify-between h-full rounded-xl bg-orange-100 px-5 py-4 gap-8"
     >
       <div class="flex flex-col gap-4 text-lg">
-        {#each currentVideo.highlights as highlight, i (activeIndex + "-" + i)}
+        {#each currentVideo.highlights as highlight, i (`${activeIndex}-${i}`)}
           <div class="flex">
             {#if highlight.timecode}
               <div
@@ -160,8 +120,9 @@
                 <button
                   onclick={() => seekTo(highlight.seconds)}
                   class="underline decoration-stone-900/30 cursor-pointer"
-                  >{highlight.timecode}</button
                 >
+                  {highlight.timecode}
+                </button>
               </div>
               <div class="mx-3 w-px bg-stone-900/10"></div>
             {/if}
@@ -173,16 +134,18 @@
         class="underline decoration-stone-900/30 text-stone-700 hover:text-stone-900 transition-colors"
         href={currentVideo.playlistLink}
         target="_blank"
-        rel="noopener noreferrer">{currentVideo.seeMoreText}</a
+        rel="noopener noreferrer"
       >
+        {currentVideo.seeMoreText}
+      </a>
     </div>
 
     <div
-      class={`w-full overflow-hidden rounded-xl bg-stone-200 ${
-        currentVideo.short ? "aspect-9/16" : "aspect-video"
-      }`}
+      class="w-full overflow-hidden rounded-xl bg-stone-200 {currentVideo.short
+        ? 'aspect-9/16'
+        : 'aspect-video'}"
     >
-      <div id={playerContainerId} class="h-full w-full"></div>
+      <div id={containerId} class="h-full w-full"></div>
     </div>
   </div>
 
@@ -198,7 +161,7 @@
     <div class="flex items-center gap-2">
       {#each videos as _, i}
         <button
-          onclick={() => handleGoTo(i)}
+          onclick={() => navigateTo(i)}
           class="h-2.5 w-2.5 rounded-full transition-all duration-300 {i ===
           activeIndex
             ? 'bg-stone-800 scale-110'
