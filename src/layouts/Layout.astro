@@ -8,9 +8,27 @@ export interface Props {
   title?: string;
   page: string;
   extraClasses?: string;
+  description?: string;
+  ogImage?: string;
+  keywords?: string;
+  canonical?: string;
+  fullTitle?: string;
 }
 
-const { title, page, extraClasses } = Astro.props;
+const {
+  title,
+  page,
+  extraClasses,
+  description,
+  ogImage,
+  keywords,
+  canonical,
+  fullTitle,
+} = Astro.props;
+
+const seoTitle =
+  fullTitle || (title ? `${title} | Merlin's Portfolio` : "Merlin's Portfolio");
+const seoDescription = description || "Merlin's epic portfolio";
 ---
 
 <!doctype html>
@@ -21,8 +39,26 @@ const { title, page, extraClasses } = Astro.props;
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
     <AstroSeo
-      title={`${title} | Merlin's Portfolio`}
-      description="Merlin's epic portfolio"
+      title={seoTitle}
+      description={seoDescription}
+      canonical={canonical}
+      openGraph={{
+        url: canonical,
+        title: seoTitle,
+        description: seoDescription,
+        images: ogImage
+          ? [{ url: ogImage, width: 1200, height: 630, alt: seoTitle }]
+          : undefined,
+        site_name: "Merlin's Portfolio",
+        locale: "en_US",
+        type: "website",
+      }}
+      twitter={{
+        cardType: "summary_large_image",
+      }}
+      additionalMetaTags={
+        keywords ? [{ name: "keywords", content: keywords }] : undefined
+      }
     />
     <Font cssVariable="--font-alice" preload />
   </head>
