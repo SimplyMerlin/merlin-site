@@ -42,25 +42,25 @@ export const videos: Video[] = [
     ],
   },
   {
-    youtubeId: "EJePwAgbHbk",
+    youtubeId: "g1fXTFzFt-M",
     playlistLink:
       "https://www.youtube.com/playlist?list=PLe_xsQA-kWyJ7enbSSUx-5uGOmvFT_apI",
     seeMoreText: "See the 31 other videos I've edited for ParrotX2 here",
     highlights: [
       {
-        description: "BALLS BALLS BALLS.",
+        description: "When working with Parrot I've edited about 32 videos, two videos a week, with this one being my favorite. So I have a lot of experience with quick turnarounds, so turning 3 hours of (unscripted) footage into a 20 minute video in about 3 days!",
       },
       {
-        timecode: "0:53",
-        seconds: 53,
+        timecode: "0:05",
+        seconds: 5,
         description:
-          "This video has some pretty cool motion graphics. I used After Effects expressions to create this accurate hex code converter.",
+          "That's me you see running around. I've written the scripts and recorded the replay shots for all these videos! Parrot once said that it was weird how similarly I wrote to how he spoke, which is quite the compliment LOL",
       },
       {
-        timecode: "2:69",
-        seconds: 169,
+        timecode: "3:40",
+        seconds: 220,
         description:
-          "More motion graphics! This time trying to explain some fairly complex numbers in a little more digestable way. Also with just a little bit of tactile sound design.",
+          "These videos are quite chill, so a lot of the effort went into pacing and music. I've gotten quite familiar with Epidemic Sounds, with the song here specifically being one of my favorites, and kinda turned into the sound of these videos.",
       },
     ],
   },
