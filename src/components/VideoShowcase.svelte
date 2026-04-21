@@ -143,7 +143,7 @@
 <div class="flex flex-col gap-6 my-8">
   <div
     class={`grid grid-cols-1 items-center gap-8 ${
-      currentVideo.short ? "md:grid-cols-[3fr_1fr]" : "md:grid-cols-2"
+      currentVideo.short ? "md:grid-cols-[4fr_1fr]" : "md:grid-cols-2"
     }`}
   >
     <div
