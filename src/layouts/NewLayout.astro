@@ -1,0 +1,32 @@
+---
+import NavBar from "../components/NavBar.astro";
+import { AstroSeo } from "@astrolib/seo";
+import "../styles/global.css";
+import { Font } from "astro:assets";
+
+export interface Props {
+  title?: string;
+  page: string;
+  extraClasses?: string;
+}
+
+const { title, page, extraClasses } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <AstroSeo
+      title={`${title} | Merlin's Portfolio`}
+      description="Merlin's epic portfolio"
+    />
+    <Font cssVariable="--font-alice" preload />
+  </head>
+  <body class={extraClasses}>
+    <slot />
+  </body>
+</html>

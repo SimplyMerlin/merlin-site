@@ -1,46 +1,46 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import BigFact from "../components/BigFact.astro";
+import VideoShowcase from "../components/VideoShowcase.svelte";
+import ClientGrid from "../components/ClientGrid.astro";
+import AboutMe from "../components/AboutMe.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<Layout title="Editor" page="editor" extraClasses="bg-orange-50 text-stone-900">
-  <main>
-    <div class="grid min-h-screen items-center">
-      <div>
-        <div class="mx-auto max-w-6xl">
-          <div class="mb-12 grid items-center justify-center gap-2">
-            <h1 class="text-center text-7xl font-bold tracking-tight">
-              Merlin lol
-            </h1>
-            <p class="text-center text-2xl font-semibold">good editor</p>
-          </div>
-        </div>
-        <div class="mx-auto grid max-w-4xl grid-cols-3 text-center">
-          <BigFact header="15M+" description="total views" />
-          <BigFact header="6+" description="years of experience" />
-          <BigFact header="600k+" description="total likes" />
-        </div>
-        <div class="mx-auto mt-12 text-lg">
-          <div
-            class="flex items-center justify-center gap-8 text-center text-blue-500 underline decoration-dashed"
-          >
-            <a
-              href="https://www.youtube.com/playlist?list=PLe_xsQA-kWyIE1Y94Z7iH1BJTQXJMn_a1"
-              target="_blank">All vids i've edited</a
-            >
-            <a href="https://youtube.com/@SimplyMerlin" target="_blank"
-              >Youtube</a
-            >
-            <a href="https://twitter.com/Simply_Merlin" target="_blank"
-              >Twitter</a
-            >
-            <a
-              href="https://discord.com/users/196505313099120640"
-              target="_blank">Discord</a
-            >
-          </div>
-        </div>
+<Layout
+  fullTitle="Merlin's Portfolio"
+  title="Editor"
+  page="editor"
+  extraClasses="bg-orange-50 text-stone-900"
+  ogImage="/og.png"
+  keywords="video editor, portfolio, music, coding, cool, simplymerlin"
+  canonical="https://simplymerlin.com/"
+>
+  <div class="container mx-auto px-2">
+    <div class="flex items-center justify-center py-48 max-sm:py-36">
+      <div class="flex max-w-2xl flex-col gap-4">
+        <h1 class="text-center font-serif text-8xl tracking-tighter max-sm:text-5xl">
+          Quite decent edits by <span class="text-brownish">Merlin</span>!
+        </h1>
+        <p class="text-center text-balance text-2xl text-stone-700 max-sm:text-lg">
+          I love video editing, and I love music, and I love coding, But I mostly love video editing. I've been editing for more than 6 years, and generated over 15 million views!
+        </p>
       </div>
     </div>
-  </main>
+
+    <h2 class="text-center font-serif text-6xl tracking-tighter max-sm:text-4xl">
+      My best works
+    </h2>
+    <VideoShowcase client:load />
+    
+    <h2 class="mt-16 text-center font-serif text-6xl tracking-tighter max-sm:text-4xl">
+      Clients & Vids
+    </h2>
+    <ClientGrid />
+
+    <h2 class="mt-16 text-center font-serif text-6xl tracking-tighter max-sm:text-4xl">
+      More stuff about me
+    </h2>
+    <AboutMe />
+  </div>
+  <Footer />
 </Layout>

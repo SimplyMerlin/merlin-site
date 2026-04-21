@@ -1,0 +1,78 @@
+---
+import LazyYouTube from "./LazyYouTube.svelte";
+
+export interface Video {
+    youtubeId: string;
+    description: string;
+    views?: string;
+}
+
+export interface Props {
+    name: string;
+    pfp: string;
+    bgColor: string;
+    pfpWidth: string;
+    videos: Video[];
+    flex?: string;
+    subscribers?: string;
+    url: string;
+    shorts?: boolean;
+}
+
+const { name, pfp, bgColor, pfpWidth, videos, flex, subscribers, url, shorts } =
+    Astro.props;
+
+const gridColsClass: Record<number, string> = {
+    1: "grid-cols-1",
+    2: "grid-cols-2",
+    4: "grid-cols-4",
+};
+---
+
+<div
+    class={`flex ${flex ?? ""} max-sm:flex-col items-center gap-4 rounded-xl ${bgColor} p-4`}
+>
+    <a
+        href={url}
+        target="_blank"
+        class={`flex ${pfpWidth} max-sm:w-full shrink-0 flex-col items-center gap-3`}
+    >
+        <img
+            class="aspect-square w-full max-sm:w-[30%] rounded-full transition-opacity duration-100 hover:opacity-75"
+            src={pfp}
+            alt={name}
+        />
+        <div class="flex flex-col items-center gap-0.5">
+            <div class="text-center font-medium text-balance">{name}</div>
+            {
+                subscribers && (
+                    <div class="text-center text-sm text-stone-600">
+                        {subscribers}
+                    </div>
+                )
+            }
+        </div>
+    </a>
+    <div
+        class={`grid ${shorts ? "max-sm:grid-cols-2" : "max-sm:grid-cols-1"} flex-1 ${gridColsClass[videos.length]} gap-4`}
+    >
+        {
+            videos.map((video) => (
+                <div class="flex flex-col gap-1">
+                    <LazyYouTube
+                        client:visible
+                        youtubeId={video.youtubeId}
+                        description={video.description}
+                        shorts={shorts}
+                    />
+                    <p class="text-sm text-stone-700">{video.description}</p>
+                    {video.views && (
+                        <p class="text-xs text-stone-500">
+                            {video.views} views
+                        </p>
+                    )}
+                </div>
+            ))
+        }
+    </div>
+</div>

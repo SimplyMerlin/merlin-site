@@ -1,0 +1,24 @@
+---
+export interface Props {
+    timecode?: string;
+    description: string;
+}
+
+const { timecode, description } = Astro.props;
+---
+
+<div class="flex">
+    {
+        timecode && (
+            <>
+                <div class="flex items-center text-stone-700 hover:text-stone-900">
+                    <p class="underline decoration-stone-900/30">{timecode}</p>
+                </div>
+                <div class="mx-3 w-px bg-stone-900/10" />
+            </>
+        )
+    }
+    <p>
+        {description}
+    </p>
+</div>

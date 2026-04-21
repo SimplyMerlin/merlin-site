@@ -1,10 +1,11 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import rehypeExternalLinks from "rehype-external-links";
 import { remarkReadingTime } from "./remark-reading-time.ts";
 
 import vercel from "@astrojs/vercel/static";
+import svelte from "@astrojs/svelte";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -24,8 +25,16 @@ export default defineConfig({
     ],
   },
 
+  experimental: {
+    fonts: [{
+      provider: fontProviders.google(),
+      name: "Alice",
+      cssVariable: "--font-alice"
+    }]
+  },
+
   site: "https://simplymerlin.com",
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), svelte()],
 
   adapter: vercel({
     webAnalytics: {

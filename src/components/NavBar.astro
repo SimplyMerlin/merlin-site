@@ -12,10 +12,10 @@ const getOpposite = () => {
 ---
 
 <nav
-  class="fixed flex w-full justify-between px-12 py-8 text-white mix-blend-difference"
+  class="fixed z-50 flex w-full justify-between px-12 py-8 text-white mix-blend-difference max-sm:px-4 max-sm:py-4"
 >
   <div>
-    <span class="text-xl font-semibold"
+    <span class="text-xl font-semibold max-sm:text-base"
       ><a
         rel="prefetch"
         class="transition-[letter-spacing_color] duration-300 hover:tracking-widest hover:text-white/75"
@@ -29,11 +29,11 @@ const getOpposite = () => {
             rel="prefetch"
             class="relative inline-flex overflow-y-hidden"
           >
-            <span class="select-none text-transparent" aria-hidden="true">
+            <span class="text-transparent select-none" aria-hidden="true">
               Developer
             </span>
             <span
-              class={`absolute left-0 top-0 transition-all duration-300 ease-in-out ${
+              class={`absolute top-0 left-0 transition-all duration-300 ease-in-out ${
                 page === "editor"
                   ? "translate-y-0 hover:-translate-y-1/2"
                   : "-translate-y-1/2 hover:translate-y-0"
@@ -59,13 +59,13 @@ const getOpposite = () => {
   </div>
   <div class="flex gap-4">
     <a
-      class="text-xl underline decoration-white/30 decoration-dashed transition-colors hover:text-white/80"
+      class="text-xl underline decoration-white/30 decoration-dashed transition-colors hover:text-white/80 max-sm:text-base"
       href="/snippets"
     >
       writing
     </a>
     <a
-      class="text-xl underline decoration-white/30 decoration-dashed transition-colors hover:text-white/80"
+      class="text-xl underline decoration-white/30 decoration-dashed transition-colors hover:text-white/80 max-sm:text-base"
       href="/contact"
     >
       contact
