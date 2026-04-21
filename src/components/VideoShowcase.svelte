@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ChevronLeft, ChevronRight } from "lucide-svelte";
   import { videos as defaultVideos, type Video } from "../data/videos";
   import { activeVideo as activeVideoStore } from "../stores/activeVideo";
 
@@ -191,19 +192,7 @@
       class="flex h-9 w-9 items-center justify-center rounded-full bg-stone-900/5 text-stone-600 transition-all hover:bg-stone-900/10 hover:text-stone-900 active:scale-95"
       aria-label="Previous video"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
+      <ChevronLeft size={18} />
     </button>
 
     <div class="flex items-center gap-2">
@@ -224,19 +213,7 @@
       class="flex h-9 w-9 items-center justify-center rounded-full bg-stone-900/5 text-stone-600 transition-all hover:bg-stone-900/10 hover:text-stone-900 active:scale-95"
       aria-label="Next video"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
+      <ChevronRight size={18} />
     </button>
   </div>
 </div>
