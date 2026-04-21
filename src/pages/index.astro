@@ -9,12 +9,12 @@ import SkillsShowcase from "../components/SkillsShowcase.svelte";
 
 <Layout title="Editor" page="editor" extraClasses="bg-orange-50 text-stone-900">
   <div class="container mx-auto px-2">
-    <div class="flex items-center justify-center py-48">
+    <div class="flex items-center justify-center py-48 max-sm:py-36">
       <div class="flex max-w-2xl flex-col gap-4">
-        <h1 class="text-center font-serif text-8xl tracking-tighter">
+        <h1 class="text-center font-serif text-8xl tracking-tighter max-sm:text-5xl">
           Quite decent edits by <span class="text-brownish">Merlin</span>!
         </h1>
-        <p class="text-center text-2xl text-stone-700">
+        <p class="text-center text-2xl text-stone-700 max-sm:text-lg">
           I'm pretty good at video editing, but I'm not too sure what to write
           here. So this is temporary. Unless you see this... then I forgot to
           write something. (oops)
@@ -24,11 +24,11 @@ import SkillsShowcase from "../components/SkillsShowcase.svelte";
 
     <!-- <SkillsShowcase client:load /> -->
 
-    <h2 class="text-center font-serif text-6xl tracking-tighter">
+    <h2 class="text-center font-serif text-6xl tracking-tighter max-sm:text-4xl">
       My best works
     </h2>
     <VideoShowcase client:load />
-    <h2 class="mt-16 text-center font-serif text-6xl tracking-tighter">
+    <h2 class="mt-16 text-center font-serif text-6xl tracking-tighter max-sm:text-4xl">
       Clients & Vids
     </h2>
     <div class="my-8 flex flex-col gap-4">
