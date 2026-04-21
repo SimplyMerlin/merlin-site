@@ -35,21 +35,23 @@ const gridColsClass: Record<number, string> = {
     <a
         href={url}
         target="_blank"
-        class={`flex ${pfpWidth} max-sm:w-full shrink-0 flex-col items-center gap-2`}
+        class={`flex ${pfpWidth} max-sm:w-full shrink-0 flex-col items-center gap-3`}
     >
         <img
             class="aspect-square w-full max-sm:w-[30%] rounded-full transition-opacity duration-100 hover:opacity-75"
             src={pfp}
             alt={name}
         />
-        <div class="text-center font-medium">{name}</div>
-        {
-            subscribers && (
-                <div class="text-center text-sm text-stone-600">
-                    {subscribers}
-                </div>
-            )
-        }
+        <div class="flex flex-col items-center gap-0.5">
+            <div class="text-center font-medium text-balance">{name}</div>
+            {
+                subscribers && (
+                    <div class="text-center text-sm text-stone-600">
+                        {subscribers}
+                    </div>
+                )
+            }
+        </div>
     </a>
     <div
         class={`grid ${shorts ? "max-sm:grid-cols-2" : "max-sm:grid-cols-1"} flex-1 ${gridColsClass[videos.length]} gap-4`}

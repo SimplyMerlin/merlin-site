@@ -110,7 +110,7 @@
     <div
       class="flex flex-col justify-between h-full rounded-xl bg-orange-100 px-5 py-4 gap-8"
     >
-      <div class="flex flex-col gap-4 text-lg">
+      <div class="flex flex-col gap-4 md:text-lg">
         {#each currentVideo.highlights as highlight, i (`${activeIndex}-${i}`)}
           <div class="flex">
             {#if highlight.timecode}
