@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout
@@ -7,23 +8,33 @@ import Layout from "../layouts/Layout.astro";
   page="contact"
   extraClasses="bg-orange-50 text-stone-900"
 >
-  <main>
-    <section class="pt-32">
-      <div class="mx-auto max-w-6xl">
-        <p class="text-center text-xl">
-          Shoot me a message on
-          <a
-            class="text-sky-400 underline decoration-dashed"
-            href="https://twitter.com/Simply_Merlin"
-            target="_blank">twitter</a
-          >
-          or <a
-            class="text-blue-600 underline decoration-dashed"
-            href="https://discord.com/users/196505313099120640"
-            target="_blank">discord</a
-          > please :)
+  <div class="flex min-h-screen flex-col">
+    <main class="flex grow flex-col items-center justify-center px-2 py-32">
+      <div class="flex max-w-2xl flex-col items-center gap-8">
+        <h1 class="text-center font-serif text-7xl tracking-tighter max-sm:text-5xl">
+          Contact me
+        </h1>
+        <p class="text-center text-balance text-2xl text-stone-700 max-sm:text-lg">
+          Please contact me on Twitter or Discord if you wanna work together!!
         </p>
+        <div class="flex items-center gap-4 text-xl font-semibold">
+          <a
+            class="text-brownish underline decoration-dashed underline-offset-4 transition-colors hover:text-stone-900"
+            href="https://twitter.com/Simply_Merlin"
+            target="_blank"
+          >
+            Twitter
+          </a>
+          <a
+            class="text-brownish underline decoration-dashed underline-offset-4 transition-colors hover:text-stone-900"
+            href="https://discord.com/users/196505313099120640"
+            target="_blank"
+          >
+            Discord
+          </a>
+        </div>
       </div>
-    </section>
-  </main>
+    </main>
+    <Footer />
+  </div>
 </Layout>
