@@ -4,6 +4,8 @@ export interface YTPlayer {
   pauseVideo(): void;
   loadVideoById(id: string): void;
   destroy(): void;
+  mute(): void;
+  unMute(): void;
 }
 
 const API_SCRIPT_SRC = "https://www.youtube.com/iframe_api";

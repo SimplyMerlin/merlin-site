@@ -14,11 +14,22 @@
   let activeIndex = $state(0);
   let player = $state<YTPlayer | null>(null);
   let playerReady = $state(false);
+  let hasInteracted = $state(false);
 
   const containerId = "yt-player-showcase";
   const currentVideo = $derived(videos[activeIndex]);
 
+  function unlockAudio() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      if (player && playerReady) {
+        player.unMute();
+      }
+    }
+  }
+
   function navigateTo(index: number) {
+    unlockAudio();
     activeIndex = index;
     activeVideoStore.set({
       youtubeId: videos[index].youtubeId,
@@ -35,6 +46,7 @@
   }
 
   function seekTo(seconds: number | undefined) {
+    unlockAudio();
     if (player && playerReady && seconds !== undefined) {
       player.seekTo(seconds, true);
       player.playVideo();
@@ -88,6 +100,9 @@
     const vid = currentVideo;
     if (player && playerReady) {
       player.loadVideoById(vid.youtubeId);
+      if (!hasInteracted && activeIndex === 0) {
+        player.mute();
+      }
       player.playVideo();
     }
   });
