@@ -72,34 +72,44 @@ import ClientRow from "./ClientRow.astro";
       ]}
     />
   </div>
-  <ClientRow
-    name="SimplyMerlin"
-    pfp="/pfps/literally-me.jpg"
-    bgColor="outline outline-black/25 bg-black/5"
-    pfpWidth="w-[10%]"
-    url="https://youtube.com/@SimplyMerlin"
-    subscribers="(owned by me)"
-    videos={[
-      {
-        youtubeId: "xbXqWFPat4E",
-        description: "Full edit",
-      },
-      {
-        youtubeId: "SLDoah0SoTI",
-        description: "Full edit",
-      },
-      {
-        youtubeId: "fcKUj8s0OBs",
-        description: "Full edit... again",
-      },
-      {
-        youtubeId: "U1liEne9Lww",
-        description:
-          "Full edit... you know these vids are kinda cringe and 4 years old lol",
-      },
-    ]}
-  />
-
+  <div class="flex items-stretch gap-4 max-sm:flex-col">
+    <ClientRow
+      name="SimplyMerlin"
+      pfp="/pfps/literally-me.jpg"
+      bgColor="outline outline-black/25 bg-black/5"
+      pfpWidth="w-[15%]"
+      flex="flex-2"
+      subscribers="(owned by me)"
+      url="https://www.youtube.com/@SimplyMerlin"
+      videos={[
+        {
+          youtubeId: "xbXqWFPat4E",
+          description: "Full edit",
+        },
+        {
+          youtubeId: "SLDoah0SoTI",
+          description:
+            "Full edit... you know these vids are kinda cringe and old lol",
+        },
+      ]}
+    />
+    <ClientRow
+      name="Wildez"
+      pfp="/pfps/Wildez.jpg"
+      bgColor="outline outline-red-400/25 bg-red-400/5"
+      pfpWidth="w-[30%]"
+      flex="flex-1"
+      subscribers="410k subs"
+      url="https://www.youtube.com/@Wildezzz"
+      videos={[
+        {
+          youtubeId: "_dfWjzCmZaM",
+          description: "Most of the edit",
+          views: "302k",
+        },
+      ]}
+    />
+  </div>
   <div class="flex items-stretch gap-4 max-sm:flex-col">
     <ClientRow
       name="HenryLand"
@@ -153,7 +163,7 @@ import ClientRow from "./ClientRow.astro";
   </div>
   <div class="flex items-center justify-center">
     <a
-      class="text-stone-500 underline decoration-stone-900/30 hover:text-stone-900 transition-colors"
+      class="text-stone-500 underline decoration-stone-900/30 transition-colors hover:text-stone-900"
       target="_blank"
       href="https://www.youtube.com/playlist?list=PLe_xsQA-kWyIE1Y94Z7iH1BJTQXJMn_a1"
       >Or, see every video I've ever edited (ever) here</a
