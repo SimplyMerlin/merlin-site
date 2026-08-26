@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/ArticleLayout.astro";
 import { AstroSeo } from "@astrolib/seo";
 
@@ -7,13 +7,13 @@ import { AstroSeo } from "@astrolib/seo";
 export async function getStaticPaths() {
   const snippetEntries = await getCollection("snippets");
   return snippetEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
 // 2. For your template, you can get the entry directly from the prop
 const { entry } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await entry.render();
+const { Content, remarkPluginFrontmatter } = await render(entry);
 ---
 
 <AstroSeo
@@ -21,7 +21,7 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
   description={entry.data.description}
   canonical={"https://simplymerlin.com/"}
   openGraph={{
-    url: `https://simplymerlin.com/snippets/${entry.slug}`,
+    url: `https://simplymerlin.com/snippets/${entry.id}`,
     title: `${entry.data.title} | Merlin's Blog`,
     description: entry.data.description,
     article: {
@@ -32,7 +32,7 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
 />
 <Layout
   title="Snippets"
-  page=`snippets-${entry.slug}`
+  page=`snippets-${entry.id}`
   extraClasses="bg-orange-50 text-stone-900"
 >
   <div class="mx-auto max-w-2xl px-3 py-32">

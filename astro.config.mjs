@@ -1,10 +1,11 @@
 import { defineConfig, fontProviders } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import rehypeExternalLinks from "rehype-external-links";
 import { remarkReadingTime } from "./remark-reading-time.ts";
 
-import vercel from "@astrojs/vercel/static";
+import vercel from "@astrojs/vercel";
 import svelte from "@astrojs/svelte";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -12,26 +13,26 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   markdown: {
-    remarkPlugins: [remarkReadingTime],
-    rehypePlugins: [
-      // _blank for external links
-      [
-        rehypeExternalLinks,
-        {
-          target: "_blank",
-          rel: ["noopener", "noreferrer"],
-        },
+    processor: unified({
+      remarkPlugins: [remarkReadingTime],
+      rehypePlugins: [
+        // _blank for external links
+        [
+          rehypeExternalLinks,
+          {
+            target: "_blank",
+            rel: ["noopener", "noreferrer"],
+          },
+        ],
       ],
-    ],
+    }),
   },
 
-  experimental: {
-    fonts: [{
-      provider: fontProviders.google(),
-      name: "Alice",
-      cssVariable: "--font-alice"
-    }]
-  },
+  fonts: [{
+    provider: fontProviders.google(),
+    name: "Alice",
+    cssVariable: "--font-alice"
+  }],
 
   site: "https://simplymerlin.com",
   integrations: [mdx(), sitemap(), svelte()],
